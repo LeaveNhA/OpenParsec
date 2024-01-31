@@ -27,7 +27,7 @@ class ParsecGLKRenderer:NSObject, GLKViewDelegate, GLKViewControllerDelegate
 	{
 		CParsec.pollAudio()
 		CParsec.setFrame(view.frame.size.width, view.frame.size.height, view.contentScaleFactor)
-		CParsec.renderFrame(.opengl)
+		CParsec.renderFrame(.metal)
 		glFinish()
 	}
 

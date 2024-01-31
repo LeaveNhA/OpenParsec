@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,8 @@
 		27E61AAA2929B92200FF6563 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E61AA92929B92200FF6563 /* MainView.swift */; };
 		27ED36FF292D4F9800B1BE3D /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ED36FE292D4F9800B1BE3D /* NetworkHandler.swift */; };
 		FC16A7AD29A97BDA00BB70A7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16A7AC29A97BDA00BB70A7 /* Shared.swift */; };
+		FC423FFD2B3883B4000C5B80 /* MetalViewUI in Frameworks */ = {isa = PBXBuildFile; productRef = FC423FFC2B3883B4000C5B80 /* MetalViewUI */; };
+		FCC013FC2B3B68ED0092DAE8 /* DummyShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = FCC013FB2B3B68ED0092DAE8 /* DummyShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +75,8 @@
 		27E61AA92929B92200FF6563 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		27ED36FE292D4F9800B1BE3D /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		FC16A7AC29A97BDA00BB70A7 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		FCC013FA2B3B405E0092DAE8 /* ParsecMetal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParsecMetal.h; sourceTree = "<group>"; };
+		FCC013FB2B3B68ED0092DAE8 /* DummyShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DummyShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27B8D571292DCA5B00A324AD /* ParsecSDK.framework in Frameworks */,
+				FC423FFD2B3883B4000C5B80 /* MetalViewUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +144,8 @@
 				27A923E329E9035D00F54BDA /* KeyboardViewController.swift */,
 				274A69CE29EA07FA00F595A5 /* SettingsView.swift */,
 				27AC751729EA339B00E8CAF7 /* URLImage.swift */,
+				FCC013FA2B3B405E0092DAE8 /* ParsecMetal.h */,
+				FCC013FB2B3B68ED0092DAE8 /* DummyShaders.metal */,
 			);
 			path = OpenParsec;
 			sourceTree = "<group>";
@@ -168,6 +175,9 @@
 			dependencies = (
 			);
 			name = OpenParsec;
+			packageProductDependencies = (
+				FC423FFC2B3883B4000C5B80 /* MetalViewUI */,
+			);
 			productName = OpenParsec;
 			productReference = 27E61A8E292965FC00FF6563 /* OpenParsec.app */;
 			productType = "com.apple.product-type.application";
@@ -196,6 +206,9 @@
 				Base,
 			);
 			mainGroup = 27E61A85292965FC00FF6563;
+			packageReferences = (
+				FC423FFB2B3883B4000C5B80 /* XCRemoteSwiftPackageReference "MetalViewUI" */,
+			);
 			productRefGroup = 27E61A8F292965FC00FF6563 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -223,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC013FC2B3B68ED0092DAE8 /* DummyShaders.metal in Sources */,
 				FC16A7AD29A97BDA00BB70A7 /* Shared.swift in Sources */,
 				27AC751829EA339B00E8CAF7 /* URLImage.swift in Sources */,
 				27A923E029E8E53000F54BDA /* TouchHandlingView.swift in Sources */,
@@ -382,10 +396,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenParsec/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7EVW949E9Y;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OpenParsec/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -409,10 +424,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenParsec/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7EVW949E9Y;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OpenParsec/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -449,6 +465,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FC423FFB2B3883B4000C5B80 /* XCRemoteSwiftPackageReference "MetalViewUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AlessandroToschi/MetalViewUI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FC423FFC2B3883B4000C5B80 /* MetalViewUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC423FFB2B3883B4000C5B80 /* XCRemoteSwiftPackageReference "MetalViewUI" */;
+			productName = MetalViewUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27E61A86292965FC00FF6563 /* Project object */;
 }

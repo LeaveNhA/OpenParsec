@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "metalviewui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AlessandroToschi/MetalViewUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c4955d5cdc1bf4664a1c6b83cf019dce6bae04a4"
+      }
+    }
+  ],
+  "version" : 2
+}

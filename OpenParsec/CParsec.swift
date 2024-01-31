@@ -1,24 +1,38 @@
 import ParsecSDK
+import MetalViewUI
+import MetalKit
 import UIKit
 
 enum RendererType
 {
 	case opengl
+    case metal
 }
 
 class CParsec
 {
+    private static var result:Any!
 	private static var _initted:Bool = false
-
-	private static var _parsec:OpaquePointer!
+    
+    //public static var _metalrenderer:MetalRenderer!
+    
+	public static var _parsec:OpaquePointer!
 	private static var _audio:OpaquePointer!
+    public static var unsafe_target: UnsafeMutablePointer<UnsafeMutableRawPointer?>?
+    public static var unsafe_queue: UnsafeMutableRawPointer?
+
 	private static let _audioPtr:UnsafeRawPointer = UnsafeRawPointer(_audio)
 
 	public static var hostWidth:Float = 0
 	public static var hostHeight:Float = 0
-
+    
+    
 	static let PARSEC_VER:UInt32 = UInt32((PARSEC_VER_MAJOR << 16) | PARSEC_VER_MINOR)
-
+    
+    //static func setMetalRenderer(source: MetalRenderer){
+    //    _metalrenderer = source
+    //}
+    
 	static func initialize()
 	{
 		if _initted { return }
@@ -33,7 +47,10 @@ class CParsec
 		audio_init(&_audio)
 
 		ParsecInit(PARSEC_VER, nil, nil, &_parsec)
-
+        
+        //_metalrenderer = MetalRenderer()
+        //_metalrenderer.setupMetal()
+        
 		_initted = true
 	}
 
@@ -47,6 +64,7 @@ class CParsec
 
 	static func connect(_ peerID:String) -> ParsecStatus
 	{
+        // create a config and try out for h256 on ipad!
 		return ParsecClientConnect(_parsec, nil, NetworkHandler.clinfo?.session_id, peerID)
 	}
 
@@ -70,11 +88,21 @@ class CParsec
 
 	static func renderFrame(_ type:RendererType, timeout:UInt32 = 16) // timeout in ms, 16 == 60 FPS, 8 == 120 FPS
 	{
+        result = nil
+        print("@Cparsec:renderFrame:Metal:\n\(unsafe_queue)\n\(unsafe_target)")
 		switch type
 		{
 			case .opengl:
-				ParsecClientGLRenderFrame(_parsec, UInt8(DEFAULT_STREAM), nil, nil, timeout)
-		}
+				result = ParsecClientGLRenderFrame(_parsec, UInt8(DEFAULT_STREAM), nil, nil, timeout)
+            case .metal:
+                result = ParsecClientMetalRenderFrame(_parsec, 
+                                                      UInt8(DEFAULT_STREAM),
+                                                      unsafe_queue,
+                                                      unsafe_target,
+                                                      nil, nil, timeout)
+        }
+        
+        print("CParsec:renderFrame:resulted:\(result)")
 	}
 
 	static func pollAudio(timeout:UInt32 = 16) // timeout in ms, 16 == 60 FPS, 8 == 120 FPS
